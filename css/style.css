@@ -1,0 +1,16 @@
+.text {
+
+    transition: 5s;
+}
+
+.dot {
+    font-size: 10em;
+    font-weight: bolder;
+    transition: 5s;
+}
+
+button {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+}
