@@ -2,12 +2,6 @@ body {
     background-color: #000;
 }
 
-.text {
-
-    transition: 5s;
-    display: none;
-}
-
 .cacoguci {
     transform: translate(80px, 20px);
 }
@@ -29,6 +23,15 @@ body {
     transition: 1s;
 }
 
+.caco-up {
+    width: 63px;
+    height: 74px;
+    background-image: url(../images/cacoup.png);
+    position: absolute;
+    left: 410px;
+    transition: 1s;
+}
+
 .caco-down {
     width: 63px;
     height: 74px;
@@ -39,10 +42,8 @@ body {
 }
 
 .caco-turn--anim {
-
     animation:
             anim 0.4s 0s 1 steps(2) forwards;
-
 }
 
 .caco-return--anim {
@@ -67,9 +68,3 @@ button {
     height: 60px;
     border-radius: 50%;
 }
-
-.test-display {
-    font-size: 20em;
-    display: none;
-}
-
