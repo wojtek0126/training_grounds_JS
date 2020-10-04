@@ -8,7 +8,11 @@ body {
     display: none;
 }
 
-.caco {
+.cacoguci {
+    transform: translate(80px, 20px);
+}
+
+.caco-left {
     width: 63px;
     height: 74px;
     background-image: url(../images/cacoturnleft.png);
@@ -25,6 +29,15 @@ body {
     transition: 1s;
 }
 
+.caco-down {
+    width: 63px;
+    height: 74px;
+    background-image: url(../images/cacodown.png);
+    position: absolute;
+    left: 410px;
+    transition: 1s;
+}
+
 .caco-turn--anim {
 
     animation:
@@ -36,6 +49,7 @@ body {
     animation:
             anim 0.4s 0s 1 steps(2);
 }
+
 @-webkit-keyframes anim {
     100% {
         background-position-x: -128px;
@@ -58,3 +72,4 @@ button {
     font-size: 20em;
     display: none;
 }
+
