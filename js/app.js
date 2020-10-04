@@ -1,9 +1,12 @@
+const print = (element) => {
+    console.log(element);
+}
 
 const getElement = (element) => {
     return document.querySelector(element);
 }
 
-// print("hello training grounds");
+print("hello training grounds");
 
 const down = getElement('.down');
 const up = getElement('.up');
@@ -13,16 +16,20 @@ const  fire = getElement('.fire');
 const dump = getElement('.dump');
 const dot = getElement('.dot');
 const caco = document.getElementById('caco1');
-// down.addEventListener('click', function () {
-//     caco.style.transform = 'translate(0, 200px)';
-// })
 
-up.addEventListener('click', function () {
-    caco.style.transform = 'translate(0, -0px)';
-})
+let distance = 100;
+let popup = caco;
+let rect = popup.getBoundingClientRect();
+console.log("popup.getBoundingClientRect(): \n" + "x: " + rect.left + "\ny: " + rect.top);
+let left1 = rect.left;
+let top1 = rect.top;
+caco.style.left = `${left1}px`;
+caco.style.top = `${top1}px`;
 
 left.addEventListener('click', function () {
-    caco.style.transform = 'translate(200px, 0px)';
+    left1 += distance;
+    caco.style.left = `${left1}px`;
+
     caco.classList.add('caco-turn--anim');
     if(caco.classList.contains('caco-left')) {
         caco.classList.remove('caco-left');
@@ -44,8 +51,11 @@ left.addEventListener('click', function () {
     caco.classList.remove('caco-return--anim');}, 200)
 })
 
+
 right.addEventListener('click', function () {
-    caco.style.transform = 'translate(-200px, 0px)';
+    left1 -= distance;
+    caco.style.left = `${left1}px`;
+
     caco.classList.add('caco-turn--anim');
     if(caco.classList.contains('caco-right')) {
         caco.classList.remove('caco-right');
@@ -69,7 +79,9 @@ right.addEventListener('click', function () {
 })
 
 down.addEventListener('click', function () {
-    caco.style.transform = 'translate(0, 200px)';
+    top1 += distance;
+    caco.style.top = `${top1}px`;
+
     caco.classList.add('caco-turn--anim');
     if(caco.classList.contains('caco-right')) {
         caco.classList.remove('caco-right');
@@ -93,7 +105,9 @@ down.addEventListener('click', function () {
 })
 
 up.addEventListener('click', function () {
-    caco.style.transform = 'translate(0, -200px)';
+    top1 -= distance;
+    caco.style.top = `${top1}px`;
+
     caco.classList.add('caco-turn--anim');
     if(caco.classList.contains('caco-right')) {
         caco.classList.remove('caco-right');
@@ -115,4 +129,7 @@ up.addEventListener('click', function () {
     setTimeout(function () {
         caco.classList.remove('caco-return--anim');}, 200)
 })
+
+
+
 
