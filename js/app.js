@@ -18,6 +18,8 @@ const caco = document.getElementById('caco1');
 const basicMissile = document.getElementById('missile_right');
 const basicCrap = document.getElementById('basic_dump')
 print(basicMissile);
+const target = getElement('.practice-target');
+print(target);
 
 const down = getElement('.down');
 const up = getElement('.up');
@@ -29,14 +31,22 @@ print(shootLeft)
 print(shootRight)
 const dump = getElement('.dump');
 
-
-let distance = 100;
+//initial x and y of caodemon
+let distance = 100;//moving distance, speed is transition in css
 let popup = caco;
 let rect = popup.getBoundingClientRect();
 let left1 = rect.left;
 let top1 = rect.top;
-caco.style.left = `${left1}px`;
+caco.style.left = `${left1}px`; //adjust caco position at start
 caco.style.top = `${top1}px`;
+//initial x and y of missile
+let missileRange = 600;//shooting distance, speed is transition in css
+let popup1 = basicMissile;
+let rect1 = popup1.getBoundingClientRect();
+let left2 = rect1.left;
+let top2 = rect1.top;
+basicMissile.style.left = `${left2}px`;
+basicMissile.style.top = `23px`; //adjust missile in caco mouth check it if collider sucks
 
 // left and right names mixed up but works
 left.addEventListener('click', function () {
@@ -103,8 +113,8 @@ right.addEventListener('click', function () {
     left1 -= distance;
     caco.style.left = `${left1}px`;
     setTimeout(function () {
-        checkPosition(caco);}, 200);
-
+        checkPosition(caco)
+        checkPosition(target);}, 200); //position of practice target it is test
     if(caco.classList.contains('caco-shoot__return--anim')) {
         caco.classList.remove('caco-shoot__return--anim');
         caco.classList.add('caco-turn--anim');
@@ -162,7 +172,6 @@ down.addEventListener('click', function () {
     caco.style.top = `${top1}px`;
     setTimeout(function () {
         checkPosition(caco);}, 200);
-
     if(caco.classList.contains('caco-shoot__return--anim')) {
         caco.classList.remove('caco-shoot__return--anim');
         caco.classList.add('caco-turn--anim');
@@ -179,10 +188,8 @@ down.addEventListener('click', function () {
         caco.classList.remove('caco-dump__return--anim');
         caco.classList.add('caco-turn--anim');
     }
-
     else {
         caco.classList.add('caco-turn--anim');
-
     }
     if(caco.classList.contains('caco-right')) {
         caco.classList.remove('caco-right');
@@ -208,7 +215,6 @@ down.addEventListener('click', function () {
         caco.classList.remove('caco-dump');
         caco.classList.add('caco-down');
     }
-
     setTimeout(function () {
         caco.classList.remove('caco-turn--anim');
         caco.classList.add('caco-return--anim');
@@ -240,13 +246,10 @@ up.addEventListener('click', function () {
         caco.classList.remove('caco-dump__return--anim');
         caco.classList.add('caco-turn--anim');
     }
-
     else {
         caco.classList.add('caco-turn--anim');
     }
-
     caco.classList.add('caco-turn--anim');
-
 
     if(caco.classList.contains('caco-right')) {
         caco.classList.remove('caco-right');
@@ -272,8 +275,6 @@ up.addEventListener('click', function () {
         caco.classList.remove('caco-dump');
         caco.classList.add('caco-up');
     }
-
-
     setTimeout(function () {
         caco.classList.remove('caco-turn--anim');
         caco.classList.add('caco-return--anim');
@@ -304,7 +305,6 @@ shootRight.addEventListener('click', function () {
     else {
         caco.classList.add('caco-shoot--anim');
     }
-
 //ok
     if(caco.classList.contains('caco-right')) {
         caco.classList.remove('caco-right');
@@ -330,7 +330,6 @@ shootRight.addEventListener('click', function () {
         caco.classList.remove('caco-fire--left');
         caco.classList.add('caco-fire--right');
     }
-
     setTimeout(function () {
         caco.classList.remove('caco-shoot--anim');
         caco.classList.add('caco-shoot__return--anim');
@@ -341,7 +340,6 @@ shootRight.addEventListener('click', function () {
 })
 
 shootLeft.addEventListener('click', function () {
-
 //ok
     if(caco.classList.contains('caco-turn--anim')) {
         caco.classList.remove('caco-turn--anim');
@@ -387,7 +385,6 @@ shootLeft.addEventListener('click', function () {
         caco.classList.remove('caco-fire--right');
         caco.classList.add('caco-fire--left');
     }
-
     setTimeout(function () {
         caco.classList.remove('caco-shoot--anim');
         caco.classList.add('caco-shoot__return--anim');
@@ -398,7 +395,6 @@ shootLeft.addEventListener('click', function () {
 })
 //dump ok
 dump.addEventListener('click', function () {
-
 //ok
     if(caco.classList.contains('caco-turn--anim')) {
         caco.classList.remove('caco-turn--anim');
@@ -420,8 +416,6 @@ dump.addEventListener('click', function () {
         caco.classList.add('caco-dump--anim');
     }
 //ok
-
-
     if(caco.classList.contains('caco-right')) {
         caco.classList.remove('caco-right');
         caco.classList.add('caco-dump');
@@ -458,60 +452,67 @@ dump.addEventListener('click', function () {
 
 
 //basic missile left and right directions are reversed
-shootLeft.addEventListener('click', function () {
-    basicMissile.style.display = 'block';
-    setTimeout(function () {
-        basicMissile.classList.add('caco-missile__anim');
-    },20);
-
-    setTimeout(function () {
-        basicMissile.style.transform = 'translateX(600px)';
-    },20);
-    setTimeout(function () {
-        basicMissile.style.display = 'none';
-        basicMissile.style.transform = 'translateX(0px)';
-        basicMissile.classList.remove('caco-missile__anim');
-    },1000);
-})
-
 shootRight.addEventListener('click', function () {
     basicMissile.style.display = 'block';
     setTimeout(function () {
         basicMissile.classList.add('caco-missile__anim');
     },20);
-
     setTimeout(function () {
-        basicMissile.style.transform = 'translateX(-600px)';
+        top2 -= missileRange;
+        basicMissile.style.left = `${top2}px`;
     },20);
     setTimeout(function () {
         basicMissile.style.display = 'none';
-        basicMissile.style.transform = 'translateX(0px)';
+        top2 += missileRange;
+        basicMissile.style.left = `${top2}px`;
         basicMissile.classList.remove('caco-missile__anim');
     },1000);
 })
+
+shootLeft.addEventListener('click', function () {
+    basicMissile.style.display = 'block';
+    setTimeout(function () {
+        basicMissile.classList.add('caco-missile__anim');
+    },20);
+    setTimeout(function () {
+        top2 += missileRange;
+        basicMissile.style.left = `${top2}px`;
+    },20);
+    setTimeout(function () {
+        basicMissile.style.display = 'none';
+        top2 -= missileRange;
+        basicMissile.style.left = `${top2}px`;
+        basicMissile.classList.remove('caco-missile__anim');
+    },1000);
+})
+
 //basic crap below
 dump.addEventListener('click', function () {
     basicCrap.style.display = 'block';
     setTimeout(function () {
         basicCrap.classList.add('caco-crap__anim');
     },20);
-
     setTimeout(function () {
-        basicCrap.style.transform = 'translateY(600px)';
+        top2 += missileRange;
+        basicCrap.style.top = `${top2}px`;
     },20);
     setTimeout(function () {
         basicCrap.style.display = 'none';
-        basicCrap.style.transform = 'translateY(0px)';
+        top2 -= missileRange;
+        basicCrap.style.top = `${top2}px`;
         basicCrap.classList.remove('caco-crap__anim');
     },1000);
 })
 
 // rect collider below:
-// if (rect1.x < rect2.x + rect2.width &&
-//     rect1.x + rect1.width > rect2.x &&
-//     rect1.y < rect2.y + rect2.height &&
-//     rect1.height + rect1.y > rect2.y) {
-//     // collision detected!
+
+
+
+// if (basicMissile.x < target.x + target.width &&
+//     basicMissile.x + basicMissile.width > target.x &&
+//     basicMissile.y < target.y + target.height &&
+//     basicMissile.height + target.y > target.y) {
+//     print('collision detected');
 // }
 
 

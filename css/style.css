@@ -11,6 +11,17 @@ button {
 .menu {
     display: flex;
 }
+/*practice target for collisions*/
+.practice-target {
+    position: absolute;
+    height: 200px;
+    width: 200px;
+    background-color: green;
+    left: 400px;
+    top:250px;
+
+}
+
 
 .cacoguci {
     margin-left: 100px;
@@ -28,13 +39,17 @@ button {
     position: relative;
 
 }
+
+#missile_right {
+
+}
 /*missile anims*/
 .basic-missile--right {
     background-image: url("../images/cacobasicmissile.png");
     position: absolute;
     left: 5px;
     height: 30px;
-    top: 33px;
+    /*top: 0px;*/
     width: 33px;
     transition: 2s;
     z-index: -1;
