@@ -17,16 +17,42 @@ button {
 }
 
 .caco-container {
-    width: 500px;
-    height: 500px;
+    width: 1500px;
+    height: 1500px;
     background-color: #000;
-    position: relative;
-}
-
-#caco1 {
+    z-index: 0;
     position: absolute;
 }
 
+#caco1 {
+    position: relative;
+
+}
+/*missile anims*/
+.basic-missile--right {
+    background-image: url("../images/cacobasicmissile.png");
+    position: absolute;
+    left: 5px;
+    height: 30px;
+    top: 33px;
+    width: 33px;
+    transition: 2s;
+    z-index: -1;
+    display: none;
+}
+
+.basic-dump {
+    background-image: url("../images/cacobasiccrap.png");
+    position: absolute;
+    left: 12px;
+    height: 21px;
+    top: 33px;
+    width: 33px;
+    transition: 2s;
+    z-index: -1;
+    /*display: none;*/
+}
+/*move and action character anims*/
 .caco-left {
     width: 63px;
     height: 74px;
@@ -61,7 +87,34 @@ button {
     /*left: 410px;*/
     transition: 1s;
 }
+/*below fires both sides*/
+.caco-fire--left {
+    width: 63px;
+    height: 74px;
+    background-image: url(../images/cacoshootright.png);
+    position: absolute;
+    /*left: 410px;*/
+    transition: 1s;
+}
 
+.caco-fire--right {
+    width: 63px;
+    height: 74px;
+    background-image: url(../images/cacoshootleft.png);
+    position: absolute;
+    /*left: 410px;*/
+    transition: 1s;
+}
+/*!*below crap character anim*!*/
+.caco-dump {
+    width: 68px;
+    height: 74px;
+    background-image: url(../images/cacodump.png);
+    position: absolute;
+    /*left: 410px;*/
+    transition: 1s;
+}
+/*char move anims*/
 .caco-turn--anim {
     animation:
             anim 0.4s 0s 1 steps(2) forwards;
@@ -71,6 +124,40 @@ button {
     animation:
             anim 0.4s 0s 1 steps(2);
 }
+/*shoot and dump char anims and return*/
+.caco-shoot--anim {
+    animation:
+            shoot-anim 0.4s 0s 1 steps(3) forwards;
+}
+
+.caco-shoot__return--anim {
+    animation:
+            shoot-anim 0.4s 0s 1 steps(3);
+}
+
+.caco-dump--anim {
+    animation:
+            dump-anim 0.4s 0s 1 steps(5) forwards;
+}
+
+.caco-dump__return--anim {
+    animation:
+            dump-anim 0.4s 0s 1 steps(5);
+}
+/*missile anims*/
+.caco-missile__anim {
+    animation:
+            missile-anim 0.4s 0s infinite steps(3);
+}
+
+.caco-crap__anim {
+    animation:
+            crap-anim 0.4s 0s infinite steps(11);
+}
+
+
+
+
 
 @-webkit-keyframes anim {
     100% {
@@ -81,6 +168,57 @@ button {
 @keyframes anim {
     100% {
         background-position-x: -128px;
+    }
+}
+
+@-webkit-keyframes anim {
+    100% {
+        background-position-x: -194px;
+    }
+}
+
+@keyframes shoot-anim {
+    100% {
+        background-position-x: -194px;
+    }
+}
+
+@-webkit-keyframes missile-anim {
+    100% {
+        background-position-x: -96px;
+    }
+}
+
+
+@keyframes missile-anim {
+    100% {
+        background-position-x: -96px;
+    }
+}
+
+@-webkit-keyframes dump-anim {
+    100% {
+        background-position-x: -365px;
+    }
+}
+
+
+@keyframes dump-anim {
+    100% {
+        background-position-x: -365px;
+    }
+}
+
+@-webkit-keyframes crap-anim {
+    100% {
+        background-position-y: -297px;
+    }
+}
+
+
+@keyframes crap-anim {
+    100% {
+        background-position-y: -297px;
     }
 }
 
