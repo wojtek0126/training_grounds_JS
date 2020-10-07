@@ -1,239 +1,297 @@
-body {
-    background-color: #000;
-}
-
-button {
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-}
-
-.menu {
-    display: flex;
-}
-/*practice target for collisions*/
-.practice-target {
-    position: absolute;
-    height: 200px;
-    width: 200px;
-    background-color: green;
-    left: 400px;
-    top:250px;
-
-}
-
-
-.cacoguci {
-    margin-left: 100px;
-}
-
-.caco-container {
-    width: 1500px;
-    height: 1500px;
-    background-color: #000;
-    z-index: 0;
-    position: absolute;
-}
-
-#caco1 {
-    position: relative;
-
-}
-
-#missile_right {
-
-}
-/*missile anims*/
-.basic-missile--right {
-    background-image: url("../images/cacobasicmissile.png");
-    position: absolute;
-    left: 5px;
-    height: 30px;
-    /*top: 0px;*/
-    width: 33px;
-    transition: 2s;
-    z-index: -1;
-    display: none;
-}
-
-.basic-dump {
-    background-image: url("../images/cacobasiccrap.png");
-    position: absolute;
-    left: 12px;
-    height: 21px;
-    top: 33px;
-    width: 33px;
-    transition: 2s;
-    z-index: -1;
-    /*display: none;*/
-}
-/*move and action character anims*/
-.caco-left {
-    width: 63px;
-    height: 74px;
-    background-image: url(../images/cacoturnleft.png);
-    position: absolute;
-    /*left: 410px;*/
-    transition: 1s;
-}
-.caco-right {
-    width: 63px;
-    height: 74px;
-    background-image: url(../images/cacoturnright.png);
-    position: absolute;
-    /*left: 410px;*/
-    transition: 1s;
-}
-
-.caco-up {
-    width: 63px;
-    height: 74px;
-    background-image: url(../images/cacoup.png);
-    position: absolute;
-    /*left: 410px;*/
-    transition: 1s;
-}
-
-.caco-down {
-    width: 63px;
-    height: 74px;
-    background-image: url(../images/cacodown.png);
-    position: absolute;
-    /*left: 410px;*/
-    transition: 1s;
-}
-/*below fires both sides*/
-.caco-fire--left {
-    width: 63px;
-    height: 74px;
-    background-image: url(../images/cacoshootright.png);
-    position: absolute;
-    /*left: 410px;*/
-    transition: 1s;
-}
-
-.caco-fire--right {
-    width: 63px;
-    height: 74px;
-    background-image: url(../images/cacoshootleft.png);
-    position: absolute;
-    /*left: 410px;*/
-    transition: 1s;
-}
-/*!*below crap character anim*!*/
-.caco-dump {
-    width: 68px;
-    height: 74px;
-    background-image: url(../images/cacodump.png);
-    position: absolute;
-    /*left: 410px;*/
-    transition: 1s;
-}
-/*char move anims*/
-.caco-turn--anim {
-    animation:
-            anim 0.4s 0s 1 steps(2) forwards;
-}
-
-.caco-return--anim {
-    animation:
-            anim 0.4s 0s 1 steps(2);
-}
-/*shoot and dump char anims and return*/
-.caco-shoot--anim {
-    animation:
-            shoot-anim 0.4s 0s 1 steps(3) forwards;
-}
-
-.caco-shoot__return--anim {
-    animation:
-            shoot-anim 0.4s 0s 1 steps(3);
-}
-
-.caco-dump--anim {
-    animation:
-            dump-anim 0.4s 0s 1 steps(5) forwards;
-}
-
-.caco-dump__return--anim {
-    animation:
-            dump-anim 0.4s 0s 1 steps(5);
-}
-/*missile anims*/
-.caco-missile__anim {
-    animation:
-            missile-anim 0.4s 0s infinite steps(3);
-}
-
-.caco-crap__anim {
-    animation:
-            crap-anim 0.4s 0s infinite steps(11);
+#paintbox {
+    height: 500px;
+    width: 500px;
+    border: dotted 2px black;
 }
 
 
 
 
 
-@-webkit-keyframes anim {
-    100% {
-        background-position-x: -128px;
-    }
-}
-
-@keyframes anim {
-    100% {
-        background-position-x: -128px;
-    }
-}
-
-@-webkit-keyframes anim {
-    100% {
-        background-position-x: -194px;
-    }
-}
-
-@keyframes shoot-anim {
-    100% {
-        background-position-x: -194px;
-    }
-}
-
-@-webkit-keyframes missile-anim {
-    100% {
-        background-position-x: -96px;
-    }
-}
 
 
-@keyframes missile-anim {
-    100% {
-        background-position-x: -96px;
-    }
-}
-
-@-webkit-keyframes dump-anim {
-    100% {
-        background-position-x: -365px;
-    }
-}
 
 
-@keyframes dump-anim {
-    100% {
-        background-position-x: -365px;
-    }
-}
-
-@-webkit-keyframes crap-anim {
-    100% {
-        background-position-y: -297px;
-    }
-}
 
 
-@keyframes crap-anim {
-    100% {
-        background-position-y: -297px;
-    }
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*body {*/
+/*    background-color: #000;*/
+/*}*/
+
+/*button {*/
+/*    width: 60px;*/
+/*    height: 60px;*/
+/*    border-radius: 50%;*/
+/*}*/
+
+/*.menu {*/
+/*    display: flex;*/
+/*}*/
+/*!*practice target for collisions*!*/
+/*.practice-target {*/
+/*    position: absolute;*/
+/*    width: 63px;*/
+/*    height: 74px;*/
+/*    background-color: green;*/
+/*    left: 400px;*/
+/*    top: 137px;*/
+/*}*/
+/*.practice-wall {*/
+/*    position: absolute;*/
+/*    width: 15px;*/
+/*    height: 74px;*/
+/*    background-color: purple;*/
+/*    left: 386px;*/
+/*    top: 137px;*/
+/*}*/
+
+
+
+/*.cacoguci {*/
+/*    margin-left: 100px;*/
+/*}*/
+
+/*.caco-container {*/
+/*    width: 1500px;*/
+/*    height: 1500px;*/
+/*    background-color: #000;*/
+/*    z-index: 0;*/
+/*    position: absolute;*/
+/*}*/
+
+/*#caco1 {*/
+/*    position: relative;*/
+
+/*}*/
+
+/*#missile_right {*/
+
+/*}*/
+/*!*missile anims*!*/
+/*.basic-missile--right {*/
+/*    background-image: url("../images/cacobasicmissile.png");*/
+/*    position: absolute;*/
+/*    left: 5px;*/
+/*    height: 32px;*/
+/*    !*top: 0px;*!*/
+/*    width: 28px;*/
+/*    transition: 2s;*/
+/*    z-index: -1;*/
+/*    display: none;*/
+/*}*/
+
+/*.basic-dump {*/
+/*    background-image: url("../images/cacobasiccrap.png");*/
+/*    position: absolute;*/
+/*    left: 12px;*/
+/*    height: 21px;*/
+/*    top: 33px;*/
+/*    width: 33px;*/
+/*    transition: 2s;*/
+/*    z-index: -1;*/
+/*    !*display: none;*!*/
+/*}*/
+/*!*move and action character anims*!*/
+/*.caco-left {*/
+/*    width: 63px;*/
+/*    height: 74px;*/
+/*    background-image: url(../images/cacoturnleft.png);*/
+/*    position: absolute;*/
+/*    !*left: 410px;*!*/
+/*    transition: 1s;*/
+/*}*/
+/*.caco-right {*/
+/*    width: 63px;*/
+/*    height: 74px;*/
+/*    background-image: url(../images/cacoturnright.png);*/
+/*    position: absolute;*/
+/*    !*left: 410px;*!*/
+/*    transition: 1s;*/
+/*}*/
+
+/*.caco-up {*/
+/*    width: 63px;*/
+/*    height: 74px;*/
+/*    background-image: url(../images/cacoup.png);*/
+/*    position: absolute;*/
+/*    !*left: 410px;*!*/
+/*    transition: 1s;*/
+/*}*/
+
+/*.caco-down {*/
+/*    width: 63px;*/
+/*    height: 74px;*/
+/*    background-image: url(../images/cacodown.png);*/
+/*    position: absolute;*/
+/*    !*left: 410px;*!*/
+/*    transition: 1s;*/
+/*}*/
+/*!*below fires both sides*!*/
+/*.caco-fire--left {*/
+/*    width: 63px;*/
+/*    height: 74px;*/
+/*    background-image: url(../images/cacoshootright.png);*/
+/*    position: absolute;*/
+/*    !*left: 410px;*!*/
+/*    transition: 0.5s;*/
+/*}*/
+
+/*.caco-fire--right {*/
+/*    width: 63px;*/
+/*    height: 74px;*/
+/*    background-image: url(../images/cacoshootleft.png);*/
+/*    position: absolute;*/
+/*    !*left: 410px;*!*/
+/*    transition: 0.5s;*/
+/*}*/
+/*!*!*below crap character anim*!*!*/
+/*.caco-dump {*/
+/*    width: 68px;*/
+/*    height: 74px;*/
+/*    background-image: url(../images/cacodump.png);*/
+/*    position: absolute;*/
+/*    !*left: 410px;*!*/
+/*    transition: 1s;*/
+/*}*/
+/*!*char move anims*!*/
+/*.caco-turn--anim {*/
+/*    animation:*/
+/*            anim 0.4s 0s 1 steps(2) forwards;*/
+/*}*/
+
+/*.caco-return--anim {*/
+/*    animation:*/
+/*            anim 0.4s 0s 1 steps(2);*/
+/*}*/
+/*!*shoot and dump char anims and return*!*/
+/*.caco-shoot--anim {*/
+/*    animation:*/
+/*            shoot-anim 0.4s 0s 1 steps(3) forwards;*/
+/*}*/
+
+/*.caco-shoot__return--anim {*/
+/*    animation:*/
+/*            shoot-anim 0.4s 0s 1 steps(3);*/
+/*}*/
+
+/*.caco-dump--anim {*/
+/*    animation:*/
+/*            dump-anim 0.4s 0s 1 steps(5) forwards;*/
+/*}*/
+
+/*.caco-dump__return--anim {*/
+/*    animation:*/
+/*            dump-anim 0.4s 0s 1 steps(5);*/
+/*}*/
+/*!*missile anims*!*/
+/*.caco-missile__anim {*/
+/*    animation:*/
+/*            missile-anim 0.4s 0s infinite steps(3);*/
+/*}*/
+
+/*.caco-crap__anim {*/
+/*    animation:*/
+/*            crap-anim 0.4s 0s infinite steps(11);*/
+/*}*/
+
+
+
+
+
+/*@-webkit-keyframes anim {*/
+/*    100% {*/
+/*        background-position-x: -128px;*/
+/*    }*/
+/*}*/
+
+/*@keyframes anim {*/
+/*    100% {*/
+/*        background-position-x: -128px;*/
+/*    }*/
+/*}*/
+
+/*@-webkit-keyframes anim {*/
+/*    100% {*/
+/*        background-position-x: -194px;*/
+/*    }*/
+/*}*/
+
+/*@keyframes shoot-anim {*/
+/*    100% {*/
+/*        background-position-x: -194px;*/
+/*    }*/
+/*}*/
+
+/*@-webkit-keyframes missile-anim {*/
+/*    100% {*/
+/*        background-position-x: -96px;*/
+/*    }*/
+/*}*/
+
+
+/*@keyframes missile-anim {*/
+/*    100% {*/
+/*        background-position-x: -96px;*/
+/*    }*/
+/*}*/
+
+/*@-webkit-keyframes dump-anim {*/
+/*    100% {*/
+/*        background-position-x: -365px;*/
+/*    }*/
+/*}*/
+
+
+/*@keyframes dump-anim {*/
+/*    100% {*/
+/*        background-position-x: -365px;*/
+/*    }*/
+/*}*/
+
+/*@-webkit-keyframes crap-anim {*/
+/*    100% {*/
+/*        background-position-y: -297px;*/
+/*    }*/
+/*}*/
+
+
+/*@keyframes crap-anim {*/
+/*    100% {*/
+/*        background-position-y: -297px;*/
+/*    }*/
+/*}*/
 
