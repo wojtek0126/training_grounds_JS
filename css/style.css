@@ -1,78 +1,3 @@
-/*body {*/
-/*    background-color: #000000;*/
-/*    !*margin: 0 auto;*!*/
-/*    !*max-width: 100%;*!*/
-/*}*/
-
-/*.container {*/
-/*    display: flex;*/
-/*    flex-direction: column;*/
-/*    justify-content: center;*/
-/*    align-items: center;*/
-/*}*/
-
-/*.player-buttons {*/
-
-/*    margin-bottom: 10px;*/
-/*}*/
-
-/*.game-logo {*/
-/*    margin: 20px 0 50px 0px;*/
-/*    height: 67px;*/
-/*    width: 400px;*/
-/*}*/
-
-
-/*#paintbox {*/
-/*    height: 500px;*/
-/*    width: 500px;*/
-/*    border: dotted 2px gold;*/
-/*}*/
-
-/*end of canvas*/
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 body {
     background-color: #000;
 }
@@ -104,8 +29,6 @@ button {
     top: 137px;
 }
 
-
-
 .cacoguci {
     margin-left: 100px;
 }
@@ -120,15 +43,12 @@ button {
 
 #caco1 {
     position: relative;
-    /*top: 141px;*/
-
-
 }
 
-#missile_right {
+#missile {
 
 }
-/*missile anims*/
+/*missile images*/
 .basic-missile--right {
     background-image: url("../images/cacobasicmissile.png");
     position: absolute;
@@ -140,7 +60,7 @@ button {
     z-index: -1;
     display: none;
 }
-
+/*dump images*/
 .basic-dump {
     background-image: url("../images/cacobasiccrap.png");
     position: absolute;
@@ -150,33 +70,26 @@ button {
     width: 33px;
     transition: 2s;
     z-index: -1;
-    /*display: none;*/
 }
-/*move and action character anims*/
+
+/*move player images*/
 .caco-left {
     width: 63px;
     height: 74px;
     background-image: url(../images/cacoturnleft.png);
     position: absolute;
-    /*left: 410px;*/
-    /*transition: 0.1s;*/
 }
 .caco-right {
     width: 63px;
     height: 74px;
     background-image: url(../images/cacoturnright.png);
     position: absolute;
-    /*left: 410px;*/
-    /*transition:0.1s;*/
 }
 
 .caco-up {
     width: 63px;
     height: 74px;
     background-image: url(../images/cacoup.png);
-    /*position: absolute;*/
-    /*left: 410px;*/
-    /*transition: 0.1s;*/
 }
 
 .caco-down {
@@ -184,17 +97,13 @@ button {
     height: 74px;
     background-image: url(../images/cacodown.png);
     position: absolute;
-    /*left: 410px;*/
-    /*transition:0.1s;*/
 }
-/*below fires both sides*/
+/*missile left and right images*/
 .caco-fire--left {
     width: 63px;
     height: 74px;
     background-image: url(../images/cacoshootright.png);
     position: absolute;
-    /*left: 410px;*/
-    /*transition: 0.5s;*/
 }
 
 .caco-fire--right {
@@ -202,16 +111,14 @@ button {
     height: 74px;
     background-image: url(../images/cacoshootleft.png);
     position: absolute;
-    /*left: 410px;*/
-    /*transition: 0.5s;*/
 }
-/*/*below crap character anim*/*/
+
+/* player crap image */
 .caco-dump {
     width: 68px;
     height: 74px;
     background-image: url(../images/cacodump.png);
     position: absolute;
-    /*left: 410px;*/
     transition: 1s;
 }
 /*char move anims*/
@@ -224,7 +131,7 @@ button {
     animation:
             anim 0.4s 0s 1 steps(2);
 }
-/*shoot and dump char anims and return*/
+/*shoot anims */
 .caco-shoot--anim {
     animation:
             shoot-anim 0.4s 0s 1 steps(3) forwards;
@@ -234,7 +141,7 @@ button {
     animation:
             shoot-anim 0.4s 0s 1 steps(3);
 }
-
+/* dump anims */
 .caco-dump--anim {
     animation:
             dump-anim 0.4s 0s 1 steps(5) forwards;
@@ -255,10 +162,7 @@ button {
             crap-anim 0.4s 0s infinite steps(11);
 }
 
-
-
-
-
+/*animations*/
 @-webkit-keyframes anim {
     100% {
         background-position-x: -128px;

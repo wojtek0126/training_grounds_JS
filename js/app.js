@@ -191,25 +191,25 @@ const checkPositionTarget = (element) => {
 
     console.log("target's position " + "popup.getBoundingClientRect(): \n" + "x: " + rect.left + "\ny: " + rect.top);
 }
+
+let knockBack = false;
 //colider below works on exit target keep it
 const colliderOnExit = (object1, object2) => {
     let obj1 = object1.getBoundingClientRect();
     let obj2 = object2.getBoundingClientRect();
-
     if (obj1.x < obj2.x + obj2.width &&
         obj1.x + obj1.width > obj2.x &&
         obj1.y < obj2.y + obj2.height &&
         obj1.height + obj1.y > obj2.y) {
-        print('collision on exit detected');
-    }
+        object2.style.background = 'gold';
+        knockBack = true;}
 }
 
 const caco = document.getElementById('caco1');
-const basicMissile = document.getElementById('missile_right');
+const basicMissile = document.getElementById('missile');
 const basicCrap = document.getElementById('basic_dump')
-print(basicMissile);
 const target = getElement('.practice-target');
-print(target);
+
 
 const start = getElement('.start');
 const down = getElement('.down');
@@ -218,30 +218,20 @@ const left = getElement('.left');
 const right = getElement('.right');
 const shootRight = getElement('.fire-right');
 const shootLeft = getElement('.fire-left');
-print(shootLeft)
-print(shootRight)
 const dump = getElement('.dump');
-// left.addEventListener('mouseover', function () {
-//     runInterval(4)
-// })
 
 
 
-
+// player control panel
+let knockBackDistance = 15;
 let distance = 1
 let popup = caco;
 let rect = popup.getBoundingClientRect();
 left1 = rect.x;
 top1 = rect.y;
-// caco.style.x = `${top1}px`;
-// playerX += speed;
-// caco.style.y = `${left1}px`;
-
-    print(left1 + ' rect x init');
-
-
-
-
+//practice target initial position
+target.style.top = "30px";
+target.style.left = "130px";
 
 
 
@@ -265,8 +255,11 @@ top1 = rect.y;
 // const interval;
 var interval;
 // let speed = 0;
+caco.style.display = `none`;
 
+//start to easy fix of first jump when up or down, it does that jump here instead, up and down ok afterwards
 start.addEventListener('click', function () {
+    caco.style.display = `block`;
     top1 += distance;
     caco.style.top = `${top1}px`;
 })
@@ -281,7 +274,20 @@ left.addEventListener('mousedown', () => {
         left1 += distance;
         caco.style.left = `${left1}px`;
         checkPosition(caco);
+        colliderOnExit(caco, target);
+        if (knockBack === true) {
+            left1 -= knockBackDistance;
+            setTimeout(function () {
+                knockBack = false
+                left1 += distance;
+            }, 1);
+        }
     }, 20)
+
+    setTimeout(function () {
+     knockBack = false
+        left1 += distance;
+    }, 1);
 
 
 })
@@ -363,6 +369,7 @@ right.addEventListener('mousedown', () => {
         left1 -= distance;
         caco.style.left = `${left1}px`;
         checkPosition(caco);
+        colliderOnExit(caco, target);
     }, 20)
 
 
@@ -436,6 +443,7 @@ down.addEventListener('mousedown', () => {
         top1 += distance;
         caco.style.top = `${top1}px`;
         checkPosition(caco);
+        colliderOnExit(caco, target);
     }, 20)
 
 
@@ -516,6 +524,7 @@ up.addEventListener('mousedown', () => {
         top1 -= distance;
         caco.style.top = `${top1}px`;
         checkPosition(caco);
+        colliderOnExit(caco, target);
     }, 20)
 
 
