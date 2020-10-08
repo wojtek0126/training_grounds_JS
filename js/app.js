@@ -236,18 +236,26 @@ top1 = rect.y;
 //practice target initial position
 target.style.top = "30px";
 target.style.left = "130px";
-//when up or down on initial press, it does jump instead of going distance, fix below, should go off after click, wrap it
+//when up or down on initial press, it does jump instead of going distance, fix below
 //also it is pre-start status
 caco.style.display = `none`;
+let startPressed = true;
 start.addEventListener('click', function () {
-    caco.style.display = `block`;
-    top1 += distance;
-    caco.style.top = `${top1}px`;
+    if(startPressed === true) {
+        caco.style.display = `block`;
+        top1 += distance;
+        caco.style.top = `${top1}px`;
+    }
+    else {
+        return
+    }
+    startPressed = false;
 })
 //player moving left
 left.addEventListener('mousedown', () => {
     interval = setInterval(() =>{
-        print('moveleft');
+            caco.classList.remove('caco-return--anim');
+            caco.classList.add('caco-turn--anim');
         left1 += distance;
         caco.style.left = `${left1}px`;
         checkPosition(caco);
@@ -266,7 +274,7 @@ left.addEventListener('mousedown', () => {
     }, 1);
 left.addEventListener('mouseup', () => {
     clearInterval(interval);
-    print('end');
+        caco.classList.remove('caco-turn--anim');
 })
 //animation triggers below
 // all new moves need to be added for every move and action, this need fix by remove all other classes
@@ -315,17 +323,12 @@ left.addEventListener('mouseup', () => {
         caco.classList.remove('caco-dump');
         caco.classList.add('caco-right');
     }
-    setTimeout(function () {
-        caco.classList.remove('caco-turn--anim');
-        caco.classList.add('caco-return--anim');
-    }, 100)
-    setTimeout(function () {
-    caco.classList.remove('caco-return--anim');}, 0);
-//
 })
+//
 right.addEventListener('mousedown', () => {
     interval = setInterval(() =>{
-        print('moveleft');
+        caco.classList.remove('caco-return--anim');
+        caco.classList.add('caco-turn--anim');
         left1 -= distance;
         caco.style.left = `${left1}px`;
         checkPosition(caco);
@@ -333,7 +336,7 @@ right.addEventListener('mousedown', () => {
     }, 20)
 right.addEventListener('mouseup', () => {
     clearInterval(interval);
-    print('end');
+    caco.classList.remove('caco-turn--anim');
 })
 
 //animation triggers below
@@ -387,7 +390,7 @@ right.addEventListener('mouseup', () => {
     setTimeout(function () {
         caco.classList.remove('caco-turn--anim');
         caco.classList.add('caco-return--anim');
-    }, 100)
+    }, 0)
     caco.classList.remove('caco-return--anim');
     setTimeout(function () {
         caco.classList.remove('caco-return--anim');}, 0);
