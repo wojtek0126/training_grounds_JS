@@ -1,172 +1,3 @@
-// const print = (element) => {
-//     return console.log(element);
-// }
-//
-// print('tet');
-//
-// let paintbox = document.getElementById('paintbox');
-//
-// let context = paintbox.getContext('2d');
-//
-// let gameOn = true;
-//
-// let playerImgFront = new Image();
-// playerImgFront.src = '../images/cacosinglefront.png'
-//
-// let plyerSpeed = 5;
-// // context.moveTo();
-// // context.lineTo();
-// // context.stroke();
-//
-// // fillRect
-// //clearRect
-// //fillStyle = "red"
-// // context.fillRect(50, 50, 100, 100);
-// // context.fillStyle = "red";
-// // context.rect(100, 100 , 30, 30);
-// // context.stroke();
-//
-// class Box {
-//     constructor(size, color) {
-//         this.size = size;
-//         this.color = color;
-//         this.x = 0;
-//         this.y = 0;
-//     }
-// }
-//
-// class Player extends Box {
-//     constructor() {
-//         super(50,'blue');
-//         this.x = 0;
-//         this.y = 0;
-//         this.speed = 0;
-//         // this.moving = false;
-//     }
-//     move() {
-//         // if(this.moving) {
-//             this.x += this.speed;
-//         // }
-//     }
-// }
-// //enemy inherits x and y from player
-// class Enemy extends Box {
-//     constructor(speed) {
-//         super(50,'red');
-//       this.speed = speed;
-//     }
-//     move() {    //this bounces objects off canvas walls
-//         this.y += this.speed;
-//         if (this.y + this.size > 500) {  //500 is canvas siza here
-//             this.speed = -(Math.abs(this.speed));
-//         }
-//         if (this.y < 0) {
-//             this.speed = (Math.abs(this.speed));
-//         }
-//     }
-// }
-// //create new player and enemies after setting speed they appear and move
-// let player = new Player(50, 'red');
-// let e1 = new Enemy(1);
-// let e2 = new Enemy(2);
-// e1.x = 120;
-// e2.x = 240;
-// //drawbox creates player or enemy etc they are visible when speed is determined
-// function isCollided(box1, box2) {
-//
-// }
-//
-// function drawbox(box) {
-//     context.fillStyle = box.color;
-//     context.fillRect(box.x, box.y, box.size, box.size);
-// }
-//
-// paintbox.addEventListener('mousedown', () => {
-//     print(plyerSpeed, ' player speed');
-//     player.speed = 5;
-// })
-//
-// paintbox.addEventListener('mouseup', () => {
-//     player.speed = 0;
-// })
-//
-// // setInterval(() => {
-// // plyerSpeed = 5 + parseInt(Math.random() * 10);
-// // player.y = 100 + (Math.random() * 300);
-// // }, 2000);
-//
-// function gameloop() {
-//     if (!gameOn) return
-//
-//
-//     print('update frame');
-//     context.clearRect(0, 0, 500, 500);  //this is relative to canvas size
-//     e1.move();  //this adds move
-//     e2.move();
-//     player.move();
-//
-//     if (isCollided(e1, player) || isCollided(e2, player) ) {
-//         window.alert('game over');
-//     }
-//     drawbox(player); //this just draws static
-//     drawbox(e1);
-//     drawbox(e2);
-//     window.requestAnimationFrame(gameloop);
-// }
-// // below instead of interval
-// // function updateGame() {
-// //     window.requestAnimationFrame(() => {
-// //
-// //         updateGame();
-// //     })
-// // }
-//
-// gameloop();
-//
-
-
-// setInterval(() => {
-//
-// }, 100);
-
-//drawbox(e1) to show it by now
-
-//end of canvas
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // pytho-script console print
 const print = (element) => {
@@ -187,6 +18,27 @@ const getAllElements = (element) => {
 const getElementById = (element) => {
     return document.getElementById(element);
 }
+//controlled interval
+const shootingMissilesAnimInit = (trigger, times= 1, idleReturnA, shootA, shootReturnA, c1, c2, c3, c4, c5, c6, cShoot) => {
+triggerButton.addEventListener('click', () => {
+    let counter = 0;
+    let interval = setInterval(function(){
+        counter += 1;
+        if(counter === timesShoot){
+            clearInterval(interval);
+        }
+ //here is what happens
+        caco.classList.remove(idleReturnA);
+        caco.classList.add(shootA);
+    }, 10);
+    caco.classList.remove(shootReturnA);
+})
+}
+
+const shootingMissilesAnim = (c1, c2, c3, c4, c5, shootAnim) => {
+
+}
+
 //function to check element's position
 const checkPosition = (element) => {
     let popup = element;
@@ -398,7 +250,8 @@ right.addEventListener('mouseup', () => {
 //
 down.addEventListener('mousedown', () => {
     interval = setInterval(() =>{
-        print('moveleft');
+        caco.classList.remove('caco-return--anim');
+        caco.classList.add('caco-turn--anim');
         top1 += distance;
         caco.style.top = `${top1}px`;
         checkPosition(caco);
@@ -406,7 +259,8 @@ down.addEventListener('mousedown', () => {
     }, 20)
 down.addEventListener('mouseup', () => {
     clearInterval(interval);
-    print('end');
+    caco.classList.remove('caco-turn--anim');
+
 })
 //animation triggers below
 // all new moves need to be added for every move and action, this need fix by remove all other classes
@@ -455,27 +309,27 @@ down.addEventListener('mouseup', () => {
         caco.classList.remove('caco-dump');
         caco.classList.add('caco-down');
     }
-    setTimeout(function () {
         caco.classList.remove('caco-turn--anim');
         caco.classList.add('caco-return--anim');
-    }, 100)
+
     caco.classList.remove('caco-return--anim');
-    setTimeout(function () {
-        caco.classList.remove('caco-return--anim');}, 0);
+
+
 })
 
 up.addEventListener('mousedown', () => {
     interval = setInterval(() =>{
-        print('moveleft');
+        caco.classList.remove('caco-return--anim');
+        caco.classList.add('caco-turn--anim');
         top1 -= distance;
         caco.style.top = `${top1}px`;
         checkPosition(caco);
         colliderOnExit(caco, target);
     }, 20)
-up.addEventListener('mouseup', () => {
-    clearInterval(interval);
-    print('end');
-})
+    up.addEventListener('mouseup', () => {
+        clearInterval(interval);
+        caco.classList.remove('caco-turn--anim');
+    })
 
 //animation triggers below
 // all new moves need to be added for every move and action, this need fix by remove all other classes
@@ -525,18 +379,46 @@ up.addEventListener('mouseup', () => {
         caco.classList.remove('caco-dump');
         caco.classList.add('caco-up');
     }
-    setTimeout(function () {
-        caco.classList.remove('caco-turn--anim');
-        caco.classList.add('caco-return--anim');
-    }, 100)
-    caco.classList.remove('caco-return--anim');
-    setTimeout(function () {
-        caco.classList.remove('caco-return--anim');}, 0);
 })
 //
-shootRight.addEventListener('click', function () {
+let charge = false;
+shootRight.addEventListener('mousedown', () => {
+    caco.classList.remove('caco-return--anim');
+
+    // caco.classList.add('caco-shoot--anim');
+    if (charge === false) {
+        caco.classList.add('caco-shoot--anim');
+        interval = setInterval(() =>{
+            caco.classList.add('caco-shoot--anim');
+            caco.classList.remove('caco-shoot--anim');
+            setTimeout(() => {
+                caco.classList.remove('caco-shoot--anim');
+            }, 500)
+            checkPosition(caco);
+            colliderOnExit(caco, target);
+        }, 200)
+    }
+    else {
+        nterval = setInterval(() => {
+            caco.classList.add('caco-shoot--anim');
+            caco.classList.remove('caco-shoot--anim');
+            setTimeout(() => {
+                caco.classList.remove('caco-shoot--anim');
+            }, 500)
+            checkPosition(caco);
+            colliderOnExit(caco, target);
+        })
+    }
+
+    caco.classList.remove('caco-shoot--anim');
+    shootRight.addEventListener('mouseup', () => {
+        clearInterval(interval);
+        // caco.classList.remove('caco-shoot--anim');
+    })
 //animation triggers below
 // all new moves need to be added for every move and action, this need fix by remove all other classes
+
+
     if(caco.classList.contains('caco-turn--anim')) {
         caco.classList.remove('caco-turn--anim');
         caco.classList.add('caco-shoot--anim');
