@@ -168,32 +168,34 @@
 
 
 
-
+// pytho-script console print
 const print = (element) => {
     console.log(element);
 }
-
 print("hello training grounds");
 
+//easy single element get
 const getElement = (element) => {
     return document.querySelector(element);
 }
+//easy all elements get
+const getAllElements = (element) => {
+    return document.querySelectorAll(element);
+}
 
-
+//easy element by id get
+const getElementById = (element) => {
+    return document.getElementById(element);
+}
+//function to check element's position
 const checkPosition = (element) => {
     let popup = element;
     let rect = popup.getBoundingClientRect();
-    console.log('caco position: ' + "popup.getBoundingClientRect(): \n" + "x: " + rect.left + "\ny: " + rect.top);
-}
-const checkPositionTarget = (element) => {
-    let popup = element;
-    let rect = popup.getBoundingClientRect();
-
     console.log("target's position " + "popup.getBoundingClientRect(): \n" + "x: " + rect.left + "\ny: " + rect.top);
 }
 
-let knockBack = false;
-//colider below works on exit target keep it
+
+//collider below works on exit target not on contact yet
 const colliderOnExit = (object1, object2) => {
     let obj1 = object1.getBoundingClientRect();
     let obj2 = object2.getBoundingClientRect();
@@ -205,12 +207,15 @@ const colliderOnExit = (object1, object2) => {
         knockBack = true;}
 }
 
+// player elements get
 const caco = document.getElementById('caco1');
 const basicMissile = document.getElementById('missile');
 const basicCrap = document.getElementById('basic_dump')
+
+//canvas elements get
 const target = getElement('.practice-target');
 
-
+// control buttons get
 const start = getElement('.start');
 const down = getElement('.down');
 const up = getElement('.up');
@@ -220,9 +225,8 @@ const shootRight = getElement('.fire-right');
 const shootLeft = getElement('.fire-left');
 const dump = getElement('.dump');
 
-
-
 // player control panel
+let knockBack = false;
 let knockBackDistance = 15;
 let distance = 1
 let popup = caco;
@@ -232,43 +236,16 @@ top1 = rect.y;
 //practice target initial position
 target.style.top = "30px";
 target.style.left = "130px";
-
-
-
-
-
-
-
-
-
-//trick for colliding: small but multiplied range and adjust transition in css lets see
-// let missile
-// let missileRange = 300;//shooting distance, speed is transition in css
-// let popup1 = basicMissile;
-// let rect1 = popup1.getBoundingClientRect();
-// let left2 = rect1.x;
-// let top2 = rect1.y;
-// basicMissile.style.x = `${left2}px`;
-// basicMissile.style.y = `23px`; //adjust missile in caco mouth check it if collider sucks
-// colliderOnExit(caco, target);
-// // left and right names mixed up but works
-// const interval;
-var interval;
-// let speed = 0;
+//when up or down on initial press, it does jump instead of going distance, fix below, should go off after click, wrap it
+//also it is pre-start status
 caco.style.display = `none`;
-
-//start to easy fix of first jump when up or down, it does that jump here instead, up and down ok afterwards
 start.addEventListener('click', function () {
     caco.style.display = `block`;
     top1 += distance;
     caco.style.top = `${top1}px`;
 })
-
-
-
+//player moving left
 left.addEventListener('mousedown', () => {
-
-
     interval = setInterval(() =>{
         print('moveleft');
         left1 += distance;
@@ -283,27 +260,16 @@ left.addEventListener('mousedown', () => {
             }, 1);
         }
     }, 20)
-
     setTimeout(function () {
      knockBack = false
         left1 += distance;
     }, 1);
-
-
-})
 left.addEventListener('mouseup', () => {
     clearInterval(interval);
     print('end');
 })
-
-
-
-
-    setTimeout(function () {
-        ;}, 200);
-
-
-// all new moves need to be added everywhere
+//animation triggers below
+// all new moves need to be added for every move and action, this need fix by remove all other classes
     if(caco.classList.contains('caco-shoot__return--anim')) {
         caco.classList.remove('caco-shoot__return--anim');
         caco.classList.add('caco-turn--anim');
@@ -323,8 +289,8 @@ left.addEventListener('mouseup', () => {
     else {
         caco.classList.add('caco-turn--anim');
     }
-    //all new moves need to be added everywhere
-
+//animation
+// all new moves need to be added for every move and action, this need fix by remove all other classes
     if(caco.classList.contains('caco-left')) {
         caco.classList.remove('caco-left');
         caco.classList.add('caco-right');
@@ -352,18 +318,12 @@ left.addEventListener('mouseup', () => {
     setTimeout(function () {
         caco.classList.remove('caco-turn--anim');
         caco.classList.add('caco-return--anim');
-    }, 1000)
+    }, 100)
     setTimeout(function () {
-    caco.classList.remove('caco-return--anim');}, 200);
-    checkPosition(caco);
-    checkPositionTarget(target);
-    colliderOnExit(caco, target);
-
-
-
+    caco.classList.remove('caco-return--anim');}, 0);
+//
+})
 right.addEventListener('mousedown', () => {
-
-
     interval = setInterval(() =>{
         print('moveleft');
         left1 -= distance;
@@ -371,73 +331,69 @@ right.addEventListener('mousedown', () => {
         checkPosition(caco);
         colliderOnExit(caco, target);
     }, 20)
-
-
-})
 right.addEventListener('mouseup', () => {
     clearInterval(interval);
     print('end');
 })
-//
-//     //position of practice target it is test
-//     if(caco.classList.contains('caco-shoot__return--anim')) {
-//         caco.classList.remove('caco-shoot__return--anim');
-//         caco.classList.add('caco-turn--anim');
-//     }
-//     if(caco.classList.contains('caco-shoot--anim')) {
-//         caco.classList.remove('caco-shoot--anim');
-//         caco.classList.add('caco-turn--anim');
-//     }
-//     if(caco.classList.contains('caco-dump--anim')) {
-//         caco.classList.remove('caco-dump--anim');
-//         caco.classList.add('caco-turn--anim');
-//     }
-//     if(caco.classList.contains('caco-dump__return--anim')) {
-//         caco.classList.remove('caco-dump__return--anim');
-//         caco.classList.add('caco-turn--anim');
-//     }
-//     else {
-//         caco.classList.add('caco-turn--anim');
-//     }
-//     if(caco.classList.contains('caco-right')) {
-//         caco.classList.remove('caco-right');
-//         caco.classList.add('caco-left');
-//     }
-//     else if(caco.classList.contains('caco-down')) {
-//         caco.classList.remove('caco-down');
-//         caco.classList.add('caco-left');
-//     }
-//     else if(caco.classList.contains('caco-up')) {
-//         caco.classList.remove('caco-up');
-//         caco.classList.add('caco-left');
-//     }
-//     else if(caco.classList.contains('caco-fire--right')) {
-//         caco.classList.remove('caco-fire--right');
-//         caco.classList.add('caco-left');
-//     }
-//     else if(caco.classList.contains('caco-fire--left')) {
-//         caco.classList.remove('caco-fire--left');
-//         caco.classList.add('caco-left');
-//     }
-//     else if(caco.classList.contains('caco-dump')) {
-//         caco.classList.remove('caco-dump');
-//         caco.classList.add('caco-left');
-//     }
-//     setTimeout(function () {
-//         caco.classList.remove('caco-turn--anim');
-//         caco.classList.add('caco-return--anim');
-//     }, 1000)
-//     caco.classList.remove('caco-return--anim');
-//     setTimeout(function () {
-//         caco.classList.remove('caco-return--anim');}, 200);
-//     checkPosition(caco);
-//     checkPositionTarget(target);
-//     colliderOnExit(caco, target); //works by now on exit target will come in handy
-// })
+
+//animation triggers below
+// all new moves need to be added for every move and action, this need fix by remove all other classes
+    if(caco.classList.contains('caco-shoot__return--anim')) {
+        caco.classList.remove('caco-shoot__return--anim');
+        caco.classList.add('caco-turn--anim');
+    }
+    if(caco.classList.contains('caco-shoot--anim')) {
+        caco.classList.remove('caco-shoot--anim');
+        caco.classList.add('caco-turn--anim');
+    }
+    if(caco.classList.contains('caco-dump--anim')) {
+        caco.classList.remove('caco-dump--anim');
+        caco.classList.add('caco-turn--anim');
+    }
+    if(caco.classList.contains('caco-dump__return--anim')) {
+        caco.classList.remove('caco-dump__return--anim');
+        caco.classList.add('caco-turn--anim');
+    }
+    else {
+        caco.classList.add('caco-turn--anim');
+    }
+//animation below
+// all new moves need to be added for every move and action, this need fix by remove all other classes
+
+    if(caco.classList.contains('caco-right')) {
+        caco.classList.remove('caco-right');
+        caco.classList.add('caco-left');
+    }
+    else if(caco.classList.contains('caco-down')) {
+        caco.classList.remove('caco-down');
+        caco.classList.add('caco-left');
+    }
+    else if(caco.classList.contains('caco-up')) {
+        caco.classList.remove('caco-up');
+        caco.classList.add('caco-left');
+    }
+    else if(caco.classList.contains('caco-fire--right')) {
+        caco.classList.remove('caco-fire--right');
+        caco.classList.add('caco-left');
+    }
+    else if(caco.classList.contains('caco-fire--left')) {
+        caco.classList.remove('caco-fire--left');
+        caco.classList.add('caco-left');
+    }
+    else if(caco.classList.contains('caco-dump')) {
+        caco.classList.remove('caco-dump');
+        caco.classList.add('caco-left');
+    }
+    setTimeout(function () {
+        caco.classList.remove('caco-turn--anim');
+        caco.classList.add('caco-return--anim');
+    }, 100)
+    caco.classList.remove('caco-return--anim');
+    setTimeout(function () {
+        caco.classList.remove('caco-return--anim');}, 0);
+})
 //
 down.addEventListener('mousedown', () => {
-
-
     interval = setInterval(() =>{
         print('moveleft');
         top1 += distance;
@@ -445,80 +401,67 @@ down.addEventListener('mousedown', () => {
         checkPosition(caco);
         colliderOnExit(caco, target);
     }, 20)
-
-
-})
 down.addEventListener('mouseup', () => {
     clearInterval(interval);
     print('end');
 })
+//animation triggers below
+// all new moves need to be added for every move and action, this need fix by remove all other classes
+    if(caco.classList.contains('caco-shoot__return--anim')) {
+        caco.classList.remove('caco-shoot__return--anim');
+        caco.classList.add('caco-turn--anim');
+    }
+    if(caco.classList.contains('caco-shoot--anim')) {
+        caco.classList.remove('caco-shoot--anim');
+        caco.classList.add('caco-turn--anim');
+    }
+    if(caco.classList.contains('caco-dump--anim')) {
+        caco.classList.remove('caco-dump--anim');
+        caco.classList.add('caco-turn--anim');
+    }
+    if(caco.classList.contains('caco-dump__return--anim')) {
+        caco.classList.remove('caco-dump__return--anim');
+        caco.classList.add('caco-turn--anim');
+    }
+    else {
+        caco.classList.add('caco-turn--anim');
+    }
+//animation below
+// all new moves need to be added for every move and action, this need fix by remove all other classes
+    if(caco.classList.contains('caco-right')) {
+        caco.classList.remove('caco-right');
+        caco.classList.add('caco-down');
+    }
+    else if(caco.classList.contains('caco-left')) {
+        caco.classList.remove('caco-left');
+        caco.classList.add('caco-down');
+    }
+    else if(caco.classList.contains('caco-up')) {
+        caco.classList.remove('caco-up');
+        caco.classList.add('caco-down');
+    }
+    else if(caco.classList.contains('caco-fire--right')) {
+        caco.classList.remove('caco-fire--right');
+        caco.classList.add('caco-down');
+    }
+    else if(caco.classList.contains('caco-fire--left')) {
+        caco.classList.remove('caco-fire--left');
+        caco.classList.add('caco-down');
+    }
+    else if(caco.classList.contains('caco-dump')) {
+        caco.classList.remove('caco-dump');
+        caco.classList.add('caco-down');
+    }
+    setTimeout(function () {
+        caco.classList.remove('caco-turn--anim');
+        caco.classList.add('caco-return--anim');
+    }, 100)
+    caco.classList.remove('caco-return--anim');
+    setTimeout(function () {
+        caco.classList.remove('caco-return--anim');}, 0);
+})
 
-
-
-
-setTimeout(function () {
-    ;}, 200);
-//
-//
-//     if(caco.classList.contains('caco-shoot__return--anim')) {
-//         caco.classList.remove('caco-shoot__return--anim');
-//         caco.classList.add('caco-turn--anim');
-//     }
-//     if(caco.classList.contains('caco-shoot--anim')) {
-//         caco.classList.remove('caco-shoot--anim');
-//         caco.classList.add('caco-turn--anim');
-//     }
-//     if(caco.classList.contains('caco-dump--anim')) {
-//         caco.classList.remove('caco-dump--anim');
-//         caco.classList.add('caco-turn--anim');
-//     }
-//     if(caco.classList.contains('caco-dump__return--anim')) {
-//         caco.classList.remove('caco-dump__return--anim');
-//         caco.classList.add('caco-turn--anim');
-//     }
-//     else {
-//         caco.classList.add('caco-turn--anim');
-//     }
-//     if(caco.classList.contains('caco-right')) {
-//         caco.classList.remove('caco-right');
-//         caco.classList.add('caco-down');
-//     }
-//     else if(caco.classList.contains('caco-left')) {
-//         caco.classList.remove('caco-left');
-//         caco.classList.add('caco-down');
-//     }
-//     else if(caco.classList.contains('caco-up')) {
-//         caco.classList.remove('caco-up');
-//         caco.classList.add('caco-down');
-//     }
-//     else if(caco.classList.contains('caco-fire--right')) {
-//         caco.classList.remove('caco-fire--right');
-//         caco.classList.add('caco-down');
-//     }
-//     else if(caco.classList.contains('caco-fire--left')) {
-//         caco.classList.remove('caco-fire--left');
-//         caco.classList.add('caco-down');
-//     }
-//     else if(caco.classList.contains('caco-dump')) {
-//         caco.classList.remove('caco-dump');
-//         caco.classList.add('caco-down');
-//     }
-//     setTimeout(function () {
-//         caco.classList.remove('caco-turn--anim');
-//         caco.classList.add('caco-return--anim');
-//     }, 1000)
-//     caco.classList.remove('caco-return--anim');
-//     setTimeout(function () {
-//         caco.classList.remove('caco-return--anim');}, 200);
-//     checkPosition(caco);
-//     checkPositionTarget(target);
-//     // colliderOnContact(caco, target);
-//     colliderOnExit(caco, target);
-// })
-//
 up.addEventListener('mousedown', () => {
-
-
     interval = setInterval(() =>{
         print('moveleft');
         top1 -= distance;
@@ -526,238 +469,238 @@ up.addEventListener('mousedown', () => {
         checkPosition(caco);
         colliderOnExit(caco, target);
     }, 20)
-
-
-})
 up.addEventListener('mouseup', () => {
     clearInterval(interval);
     print('end');
 })
+
+//animation triggers below
+// all new moves need to be added for every move and action, this need fix by remove all other classes
+    if(caco.classList.contains('caco-shoot__return--anim')) {
+        caco.classList.remove('caco-shoot__return--anim');
+        caco.classList.add('caco-turn--anim');
+    }
+    if(caco.classList.contains('caco-shoot--anim')) {
+        caco.classList.remove('caco-shoot--anim');
+        caco.classList.add('caco-turn--anim');
+    }
+    if(caco.classList.contains('caco-dump--anim')) {
+        caco.classList.remove('caco-dump--anim');
+        caco.classList.add('caco-turn--anim');
+    }
+    if(caco.classList.contains('caco-dump__return--anim')) {
+        caco.classList.remove('caco-dump__return--anim');
+        caco.classList.add('caco-turn--anim');
+    }
+    else {
+        caco.classList.add('caco-turn--anim');
+    }
+    // caco.classList.add('caco-turn--anim');
+//animation below
+// all new moves need to be added for every move and action, this need fix by remove all other classes
+    if(caco.classList.contains('caco-right')) {
+        caco.classList.remove('caco-right');
+        caco.classList.add('caco-up');
+    }
+    else if(caco.classList.contains('caco-left')) {
+        caco.classList.remove('caco-left');
+        caco.classList.add('caco-up');
+    }
+    else if(caco.classList.contains('caco-down')) {
+        caco.classList.remove('caco-down');
+        caco.classList.add('caco-up');
+    }
+    else if(caco.classList.contains('caco-fire--right')) {
+        caco.classList.remove('caco-fire--right');
+        caco.classList.add('caco-up');
+    }
+    else if(caco.classList.contains('caco-fire--left')) {
+        caco.classList.remove('caco-fire--left');
+        caco.classList.add('caco-up');
+    }
+    else if(caco.classList.contains('caco-dump')) {
+        caco.classList.remove('caco-dump');
+        caco.classList.add('caco-up');
+    }
+    setTimeout(function () {
+        caco.classList.remove('caco-turn--anim');
+        caco.classList.add('caco-return--anim');
+    }, 100)
+    caco.classList.remove('caco-return--anim');
+    setTimeout(function () {
+        caco.classList.remove('caco-return--anim');}, 0);
+})
 //
+shootRight.addEventListener('click', function () {
+//animation triggers below
+// all new moves need to be added for every move and action, this need fix by remove all other classes
+    if(caco.classList.contains('caco-turn--anim')) {
+        caco.classList.remove('caco-turn--anim');
+        caco.classList.add('caco-shoot--anim');
+    }
+    if(caco.classList.contains('caco-return--anim')) {
+        caco.classList.remove('caco-return--anim');
+        caco.classList.add('caco-shoot--anim');
+    }
+    if(caco.classList.contains('caco-dump--anim')) {
+        caco.classList.remove('caco-dump--anim');
+        caco.classList.add('caco-shoot--anim');
+    }
+    if(caco.classList.contains('caco-dump__return--anim')) {
+        caco.classList.remove('caco-dump__return--anim');
+        caco.classList.add('caco-shoot--anim');
+    }
+    else {
+        caco.classList.add('caco-shoot--anim');
+    }
+//animation below
+// all new moves need to be added for every move and action, this need fix by remove all other classes
+    if(caco.classList.contains('caco-right')) {
+        caco.classList.remove('caco-right');
+        caco.classList.add('caco-fire--right');
+    }
+    else if(caco.classList.contains('caco-left')) {
+        caco.classList.remove('caco-left');
+        caco.classList.add('caco-fire--right');
+    }
+    else if(caco.classList.contains('caco-down')) {
+        caco.classList.remove('caco-down');
+        caco.classList.add('caco-fire--right');
+    }
+    else if(caco.classList.contains('caco-up')) {
+        caco.classList.remove('caco-up');
+        caco.classList.add('caco-fire--right');
+    }
+    else if(caco.classList.contains('caco-dump')) {
+        caco.classList.remove('caco-dump');
+        caco.classList.add('caco-fire--right');
+    }
+    else if(caco.classList.contains('caco-fire--left')) {
+        caco.classList.remove('caco-fire--left');
+        caco.classList.add('caco-fire--right');
+    }
+    setTimeout(function () {
+        caco.classList.remove('caco-shoot--anim');
+        caco.classList.add('caco-shoot__return--anim');
+    }, 100)
+    caco.classList.remove('caco-shoot__return--anim'); //check ifthis is necessary(for all moves)
+    setTimeout(function () {
+        caco.classList.remove('caco-shoot__return--anim');}, 0);
+})
+//player action anims below
+shootLeft.addEventListener('click', function () {
+//animation triggers below
+// all new moves need to be added for every move and action, this need fix by remove all other classes
+    if(caco.classList.contains('caco-turn--anim')) {
+        caco.classList.remove('caco-turn--anim');
+        caco.classList.add('caco-shoot--anim');
+    }
+    if(caco.classList.contains('caco-return--anim')) {
+        caco.classList.remove('caco-return--anim');
+        caco.classList.add('caco-shoot--anim');
+    }
+    if(caco.classList.contains('caco-dump--anim')) {
+        caco.classList.remove('caco-dump--anim');
+        caco.classList.add('caco-shoot--anim');
+    }
+    if(caco.classList.contains('caco-dump__return--anim')) {
+        caco.classList.remove('caco-dump__return--anim');
+        caco.classList.add('caco-shoot--anim');
+    }
+    else {
+        caco.classList.add('caco-shoot--anim');
+    }
+//animation below
+// all new moves need to be added for every move and action, this need fix by remove all other classes
+    if(caco.classList.contains('caco-right')) {
+        caco.classList.remove('caco-right');
+        caco.classList.add('caco-fire--left');
+    }
+    else if(caco.classList.contains('caco-left')) {
+        caco.classList.remove('caco-left');
+        caco.classList.add('caco-fire--left');
+    }
+    else if(caco.classList.contains('caco-down')) {
+        caco.classList.remove('caco-down');
+        caco.classList.add('caco-fire--left');
+    }
+    else if(caco.classList.contains('caco-up')) {
+        caco.classList.remove('caco-up');
+        caco.classList.add('caco-fire--left');
+    }
+    else if(caco.classList.contains('caco-dump')) {
+        caco.classList.remove('caco-dump');
+        caco.classList.add('caco-fire--left');
+    }
+    else if(caco.classList.contains('caco-fire--right')) {
+        caco.classList.remove('caco-fire--right');
+        caco.classList.add('caco-fire--left');
+    }
+    setTimeout(function () {
+        caco.classList.remove('caco-shoot--anim');
+        caco.classList.add('caco-shoot__return--anim');
+    }, 100)
+    caco.classList.remove('caco-shoot__return--anim'); //check ifthis is necessary(for all moves)
+    setTimeout(function () {
+        caco.classList.remove('caco-shoot__return--anim');}, 0);
+})
 //
-//     if(caco.classList.contains('caco-shoot__return--anim')) {
-//         caco.classList.remove('caco-shoot__return--anim');
-//         caco.classList.add('caco-turn--anim');
-//     }
-//     if(caco.classList.contains('caco-shoot--anim')) {
-//         caco.classList.remove('caco-shoot--anim');
-//         caco.classList.add('caco-turn--anim');
-//     }
-//     if(caco.classList.contains('caco-dump--anim')) {
-//         caco.classList.remove('caco-dump--anim');
-//         caco.classList.add('caco-turn--anim');
-//     }
-//     if(caco.classList.contains('caco-dump__return--anim')) {
-//         caco.classList.remove('caco-dump__return--anim');
-//         caco.classList.add('caco-turn--anim');
-//     }
-//     else {
-//         caco.classList.add('caco-turn--anim');
-//     }
-//     caco.classList.add('caco-turn--anim');
-//
-//     if(caco.classList.contains('caco-right')) {
-//         caco.classList.remove('caco-right');
-//         caco.classList.add('caco-up');
-//     }
-//     else if(caco.classList.contains('caco-left')) {
-//         caco.classList.remove('caco-left');
-//         caco.classList.add('caco-up');
-//     }
-//     else if(caco.classList.contains('caco-down')) {
-//         caco.classList.remove('caco-down');
-//         caco.classList.add('caco-up');
-//     }
-//     else if(caco.classList.contains('caco-fire--right')) {
-//         caco.classList.remove('caco-fire--right');
-//         caco.classList.add('caco-up');
-//     }
-//     else if(caco.classList.contains('caco-fire--left')) {
-//         caco.classList.remove('caco-fire--left');
-//         caco.classList.add('caco-up');
-//     }
-//     else if(caco.classList.contains('caco-dump')) {
-//         caco.classList.remove('caco-dump');
-//         caco.classList.add('caco-up');
-//     }
-//     setTimeout(function () {
-//         caco.classList.remove('caco-turn--anim');
-//         caco.classList.add('caco-return--anim');
-//     }, 1000)
-//     caco.classList.remove('caco-return--anim');
-//     setTimeout(function () {
-//         caco.classList.remove('caco-return--anim');}, 200);
-//     checkPosition(caco);
-//     checkPositionTarget(target);
-//     // colliderOnContact(caco, target);
-//     colliderOnExit(caco, target);
-// })
-//
-// shootRight.addEventListener('click', function () {
-// //anims ok
-//     if(caco.classList.contains('caco-turn--anim')) {
-//         caco.classList.remove('caco-turn--anim');
-//         caco.classList.add('caco-shoot--anim');
-//     }
-//     if(caco.classList.contains('caco-return--anim')) {
-//         caco.classList.remove('caco-return--anim');
-//         caco.classList.add('caco-shoot--anim');
-//     }
-//     if(caco.classList.contains('caco-dump--anim')) {
-//         caco.classList.remove('caco-dump--anim');
-//         caco.classList.add('caco-shoot--anim');
-//     }
-//     if(caco.classList.contains('caco-dump__return--anim')) {
-//         caco.classList.remove('caco-dump__return--anim');
-//         caco.classList.add('caco-shoot--anim');
-//     }
-//     else {
-//         caco.classList.add('caco-shoot--anim');
-//     }
-// //ok
-//     if(caco.classList.contains('caco-right')) {
-//         caco.classList.remove('caco-right');
-//         caco.classList.add('caco-fire--right');
-//     }
-//     else if(caco.classList.contains('caco-left')) {
-//         caco.classList.remove('caco-left');
-//         caco.classList.add('caco-fire--right');
-//     }
-//     else if(caco.classList.contains('caco-down')) {
-//         caco.classList.remove('caco-down');
-//         caco.classList.add('caco-fire--right');
-//     }
-//     else if(caco.classList.contains('caco-up')) {
-//         caco.classList.remove('caco-up');
-//         caco.classList.add('caco-fire--right');
-//     }
-//     else if(caco.classList.contains('caco-dump')) {
-//         caco.classList.remove('caco-dump');
-//         caco.classList.add('caco-fire--right');
-//     }
-//     else if(caco.classList.contains('caco-fire--left')) {
-//         caco.classList.remove('caco-fire--left');
-//         caco.classList.add('caco-fire--right');
-//     }
-//     setTimeout(function () {
-//         caco.classList.remove('caco-shoot--anim');
-//         caco.classList.add('caco-shoot__return--anim');
-//     }, 1000)
-//     caco.classList.remove('caco-shoot__return--anim'); //check ifthis is necessary(for all moves)
-//     setTimeout(function () {
-//         caco.classList.remove('caco-shoot__return--anim');}, 200);
-// })
-//
-// shootLeft.addEventListener('click', function () {
-// //ok
-//     if(caco.classList.contains('caco-turn--anim')) {
-//         caco.classList.remove('caco-turn--anim');
-//         caco.classList.add('caco-shoot--anim');
-//     }
-//     if(caco.classList.contains('caco-return--anim')) {
-//         caco.classList.remove('caco-return--anim');
-//         caco.classList.add('caco-shoot--anim');
-//     }
-//     if(caco.classList.contains('caco-dump--anim')) {
-//         caco.classList.remove('caco-dump--anim');
-//         caco.classList.add('caco-shoot--anim');
-//     }
-//     if(caco.classList.contains('caco-dump__return--anim')) {
-//         caco.classList.remove('caco-dump__return--anim');
-//         caco.classList.add('caco-shoot--anim');
-//     }
-//     else {
-//         caco.classList.add('caco-shoot--anim');
-//     }
-// //ok
-//     if(caco.classList.contains('caco-right')) {
-//         caco.classList.remove('caco-right');
-//         caco.classList.add('caco-fire--left');
-//     }
-//     else if(caco.classList.contains('caco-left')) {
-//         caco.classList.remove('caco-left');
-//         caco.classList.add('caco-fire--left');
-//     }
-//     else if(caco.classList.contains('caco-down')) {
-//         caco.classList.remove('caco-down');
-//         caco.classList.add('caco-fire--left');
-//     }
-//     else if(caco.classList.contains('caco-up')) {
-//         caco.classList.remove('caco-up');
-//         caco.classList.add('caco-fire--left');
-//     }
-//     else if(caco.classList.contains('caco-dump')) {
-//         caco.classList.remove('caco-dump');
-//         caco.classList.add('caco-fire--left');
-//     }
-//     else if(caco.classList.contains('caco-fire--right')) {
-//         caco.classList.remove('caco-fire--right');
-//         caco.classList.add('caco-fire--left');
-//     }
-//     setTimeout(function () {
-//         caco.classList.remove('caco-shoot--anim');
-//         caco.classList.add('caco-shoot__return--anim');
-//     }, 1000)
-//     caco.classList.remove('caco-shoot__return--anim'); //check ifthis is necessary(for all moves)
-//     setTimeout(function () {
-//         caco.classList.remove('caco-shoot__return--anim');}, 200);
-// })
-// //dump ok
-// dump.addEventListener('click', function () {
-// //ok
-//     if(caco.classList.contains('caco-turn--anim')) {
-//         caco.classList.remove('caco-turn--anim');
-//         caco.classList.add('caco-dump--anim');
-//     }
-//     if(caco.classList.contains('caco-return--anim')) {
-//         caco.classList.remove('caco-return--anim');
-//         caco.classList.add('caco-dump--anim');
-//     }
-//     if(caco.classList.contains('caco-shoot--anim')) {
-//         caco.classList.remove('caco-shoot--anim');
-//         caco.classList.add('caco-dump--anim');
-//     }
-//     if(caco.classList.contains('caco-shoot__return--anim')) {
-//         caco.classList.remove('caco-shoot__return--anim');
-//         caco.classList.add('caco-dump--anim');
-//     }
-//     else {
-//         caco.classList.add('caco-dump--anim');
-//     }
-// //ok
-//     if(caco.classList.contains('caco-right')) {
-//         caco.classList.remove('caco-right');
-//         caco.classList.add('caco-dump');
-//     }
-//     else if(caco.classList.contains('caco-left')) {
-//         caco.classList.remove('caco-left');
-//         caco.classList.add('caco-dump');
-//     }
-//     else if(caco.classList.contains('caco-down')) {
-//         caco.classList.remove('caco-down');
-//         caco.classList.add('caco-dump');
-//     }
-//     else if(caco.classList.contains('caco-up')) {
-//         caco.classList.remove('caco-up');
-//         caco.classList.add('caco-dump');
-//     }
-//     else if(caco.classList.contains('caco-fire--left')) {
-//         caco.classList.remove('caco-fire--left');
-//         caco.classList.add('caco-dump');
-//     }
-//     else if(caco.classList.contains('caco-fire--right')) {
-//         caco.classList.remove('caco-fire--right');
-//         caco.classList.add('caco-dump');
-//     }
-// //ok
-//     setTimeout(function () {
-//         caco.classList.remove('caco-dump--anim');
-//         caco.classList.add('caco-dump__return--anim');
-//     }, 1000)
-//     caco.classList.remove('caco-dump__return--anim'); //check if this is necessary(for all moves)
-//     setTimeout(function () {
-//         caco.classList.remove('caco-dump__return--anim');}, 200);
-// })
+dump.addEventListener('click', function () {
+//animation triggers below
+// all new moves need to be added for every move and action, this need fix by remove all other classes
+    if(caco.classList.contains('caco-turn--anim')) {
+        caco.classList.remove('caco-turn--anim');
+        caco.classList.add('caco-dump--anim');
+    }
+    if(caco.classList.contains('caco-return--anim')) {
+        caco.classList.remove('caco-return--anim');
+        caco.classList.add('caco-dump--anim');
+    }
+    if(caco.classList.contains('caco-shoot--anim')) {
+        caco.classList.remove('caco-shoot--anim');
+        caco.classList.add('caco-dump--anim');
+    }
+    if(caco.classList.contains('caco-shoot__return--anim')) {
+        caco.classList.remove('caco-shoot__return--anim');
+        caco.classList.add('caco-dump--anim');
+    }
+    else {
+        caco.classList.add('caco-dump--anim');
+    }
+//animation below
+// all new moves need to be added for every move and action, this need fix by remove all other classes
+    if(caco.classList.contains('caco-right')) {
+        caco.classList.remove('caco-right');
+        caco.classList.add('caco-dump');
+    }
+    else if(caco.classList.contains('caco-left')) {
+        caco.classList.remove('caco-left');
+        caco.classList.add('caco-dump');
+    }
+    else if(caco.classList.contains('caco-down')) {
+        caco.classList.remove('caco-down');
+        caco.classList.add('caco-dump');
+    }
+    else if(caco.classList.contains('caco-up')) {
+        caco.classList.remove('caco-up');
+        caco.classList.add('caco-dump');
+    }
+    else if(caco.classList.contains('caco-fire--left')) {
+        caco.classList.remove('caco-fire--left');
+        caco.classList.add('caco-dump');
+    }
+    else if(caco.classList.contains('caco-fire--right')) {
+        caco.classList.remove('caco-fire--right');
+        caco.classList.add('caco-dump');
+    }
+    setTimeout(function () {
+        caco.classList.remove('caco-dump--anim');
+        caco.classList.add('caco-dump__return--anim');
+    }, 100)
+    caco.classList.remove('caco-dump__return--anim'); //check if this is necessary(for all moves)
+    setTimeout(function () {
+        caco.classList.remove('caco-dump__return--anim');}, 0);
+})
 //
 //
 // //basic missile left and right directions are reversed
