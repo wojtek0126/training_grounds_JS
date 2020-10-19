@@ -1,5 +1,6 @@
 body {
     background-color: #000;
+    overflow: hidden;
 }
 
 button {
@@ -12,22 +13,42 @@ button {
     display: flex;
 }
 /*practice target for collisions*/
-.practice-target {
+.practice-wall--top {
     position: absolute;
-    width: 63px;
-    height: 74px;
+    width: 1202px;
+    height: 3px;
     background-color: green;
-    left: 400px;
-    top: 337px;
+    left:0px;
+    top: 0px;
 }
-.practice-wall {
+.practice-wall--left {
     position: absolute;
-    width: 15px;
-    height: 74px;
-    background-color: purple;
-    left: 386px;
-    top: 137px;
+    width: 3px;
+    height: 500px;
+    background-color: green;
+    left: 0px;
+    top: 0px;
 }
+
+.practice-wall--right {
+    position: absolute;
+    width: 3px;
+    height: 500px;
+    background-color: green;
+    left: 1200px;
+    top: 0px;
+}
+
+.practice-wall--bottom {
+    position: absolute;
+    width: 1202px;
+    height: 3px;
+    background-color: green;
+    left: 1px;
+    top: 501px;
+}
+
+
 
 .cacoguci {
     margin-left: 100px;
@@ -43,6 +64,7 @@ button {
 
 #caco1 {
     position: relative;
+    left: 20px;
 }
 
 #missile {
@@ -52,14 +74,18 @@ button {
 .basic-missile--right {
     background-image: url("../images/cacobasicmissile.png");
     position: absolute;
-    left: 5px;
+    left: 20px;
     height: 32px;
-    /*top: 0px;*/
+    top: 25px;
     width: 28px;
-    transition: 2s;
+    /*transition: 2s;*/
     z-index: -1;
     display: none;
 }
+
+/*.reset {*/
+/*    left: 0px;*/
+/*}*/
 /*dump images*/
 .basic-dump {
     background-image: url("../images/cacobasiccrap.png");
@@ -68,7 +94,7 @@ button {
     height: 21px;
     top: 33px;
     width: 33px;
-    transition: 2s;
+    /*transition: 2s;*/
     z-index: -1;
 }
 
